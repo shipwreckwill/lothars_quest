@@ -14,7 +14,7 @@ class ButtResource:
         resp.body = json.dumps(thing)
 
     def on_post(self, req, resp):
-        butt = req.media
+        butt = req.get_param("name", required=True)
         message = {'message': butt}
         resp.status = falcon.HTTP_200
         # resp.content_type = falcon.MEDIA_TEXT
