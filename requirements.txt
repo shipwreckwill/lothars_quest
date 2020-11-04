@@ -1,0 +1,5 @@
+falcon == 1.4.1
+falcon-autocrud
+sqlalchamy
+gunicorn
+Psycopg2
