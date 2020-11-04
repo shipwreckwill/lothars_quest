@@ -25,7 +25,7 @@ app = falcon.API(
         Middleware()
         ]
 )
-app.req_options.auto_parse_form_urlencode=True
+app.req_options.auto_parse_form_urlencoded=True
 
 butt = ButtResource()
 
