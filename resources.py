@@ -42,7 +42,7 @@ class DiceResource:
                     '\n --D04\n\n')
     
     def on_post(self, req, resp):
-        roll = random(req.get_param("die", required=True))
+        roll = random(int(req.get_param("die", required=True)))
         resp.status = falcon.HTTP_200
         message = {'roll': roll}
         resp.body = json.dumps(message)
