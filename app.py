@@ -14,7 +14,9 @@ app = falcon.API(
 app.req_options.auto_parse_form_urlencoded=True
 
 butt = ButtResource()
+dice = DiceResource()
 
+app.add_route('/dice', dice)
 app.add_route('/butt', butt)
 app.add_route('/character', CharacterCollectionResource(db_engine))
 app.add_route('/character/{id}', CharacterResource(db_engine))
