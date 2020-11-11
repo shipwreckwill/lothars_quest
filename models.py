@@ -28,8 +28,8 @@ class Location(Base):
     id = Column(Integer, primary_key=True)
     title = Column(String(50))
     description = Column(String(240))
-    exits = Column(Array(String(20)))
-    items = Column(Array(Integer))
+    exits = Column(ARRAY(String(20)))
+    items = Column(ARRAY(Integer))
 
 # class ButtResource:
 #     def on_get(self, req, resp):
