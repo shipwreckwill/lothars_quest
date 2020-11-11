@@ -47,9 +47,9 @@ class DiceResource:
         roll = req.get_param("die", required=True)
         roll = random.randrange(int(roll))
         resp.status = falcon.HTTP_200
-        if roll not in diceBag:
-            message = { 'error' : 'You do not have that die in your Dice Bag...'}
+        if roll in diceBag:
+            message = {'roll': roll}
             resp.body = json.dumps(message)
         else:
-            message = {'roll': roll}
+            message = { 'error' : 'You do not have that die in your Dice Bag...'}
             resp.body = json.dumps(message)
