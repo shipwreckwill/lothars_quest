@@ -2,7 +2,7 @@ from falcon_autocrud.resource import CollectionResource, SingleResource
 from models import *
 import random
 
-class CharacterCollectionResource(CollectionResource):O
+class CharacterCollectionResource(CollectionResource):
     model = Character
     methods = ['GET', 'POST', 'PUT']
 
