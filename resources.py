@@ -19,11 +19,11 @@ class WeaponResource(SingleResource):
     model = Weapon
 
 class LocationCollectionResource(CollectionResource):
-    model Location
+    model = Location
     methods = ['GET', 'POST', 'PUT']
 
 class LocationResource(SingleResource):
-    model Location
+    model = Location
 
 class ButtResource:
     """
