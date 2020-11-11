@@ -44,11 +44,11 @@ class DiceResource:
     
     def on_post(self, req, resp):
         diceBag = [4,6,8,10,12,20]
-        roll = req.get_param("die", required=True)
-        roll = random.randrange(int(roll))
+        die = req.get_param("die", required=True)
         resp.status = falcon.HTTP_200
-        print(f"The dice rolled is: {0}",roll)
+        print:Weapon(f"The dice rolled is: {die}")
         if roll in diceBag:
+            roll = random.randrange(int(die))
             message = {'roll': roll}
             resp.body = json.dumps(message)
         else:
