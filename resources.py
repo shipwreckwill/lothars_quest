@@ -47,6 +47,7 @@ class DiceResource:
         roll = req.get_param("die", required=True)
         roll = random.randrange(int(roll))
         resp.status = falcon.HTTP_200
+        printf("The dice rolled is: {0}",roll)
         if roll in diceBag:
             message = {'roll': roll}
             resp.body = json.dumps(message)
