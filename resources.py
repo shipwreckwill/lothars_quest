@@ -1,6 +1,9 @@
 from falcon_autocrud.resource import CollectionResource, SingleResource
 from models import *
 import random
+import game
+
+game = Game()
 
 class CharacterCollectionResource(CollectionResource):
     model = Character
@@ -17,6 +20,11 @@ class WeaponResource(SingleResource):
     model = Weapon
 
 class ButtResource:
+    """
+    ButtResource:
+        On Get - Says 'Buttt', three t's makes it funny.
+        On Post - Parrot Function, just repeats input of "Name" param
+    """
     def on_get(self, req, resp):
         resp.status = falcon.HTTP_200
         resp.content_type = falcon.MEDIA_TEXT
@@ -27,10 +35,15 @@ class ButtResource:
         butt = req.get_param("name", required=True)
         message = {'message': butt}
         resp.status = falcon.HTTP_200
-        # resp.content_type = falcon.MEDIA_TEXT
         resp.body = json.dumps(message)
 
 class DiceResource:
+    """
+    DiceResource: Let player cast dice for checks, attacks, etc...
+        On Get - Returns Available Dice that may be Cast
+        On Pull - Accepts dN as parameter, N being number of sides on die,
+           returns result of casting die.
+    """
     def on_get(self, req, resp):
         resp.status = falcon.HTTP_200
         resp.content_type = falcon.MEDIA_TEXT
@@ -43,14 +56,16 @@ class DiceResource:
                     '\n --D04\n\n')
     
     def on_post(self, req, resp):
-        diceBag = [4,6,8,10,12,20]
+        # diceBag = [4,6,8,10,12,20]
         die = int(req.get_param("die", required=True))
         resp.status = falcon.HTTP_200
         print(f"The dice rolled is: {die}")
-        if die in diceBag:
-            roll = random.randrange(die)
-            message = {'roll': roll}
-            resp.body = json.dumps(message)
-        else:
-            message = { 'error' : 'You do not have that die in your Dice Bag...'}
-            resp.body = json.dumps(message)
+        message = game.rollDice(die)
+        resp.body = json.dumps(message)
+        # if die in diceBag:
+        #     roll = random.randrange(die)
+        #     message = {'roll': roll}
+        #     resp.body = json.dumps(message)
+        # else:
+        #     message = { 'error' : 'You do not have that die in your Dice Bag...'}
+        #     resp.body = json.dumps(message)
