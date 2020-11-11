@@ -29,7 +29,7 @@ class Location(Base):
     title = Column(String(50))
     description = Column(String(240))
     exits = Column(ARRAY(String(20)))
-    items = Column(ARRAY(Integer))
+    inventory = Column(ARRAY(Integer))
 
 # class ButtResource:
 #     def on_get(self, req, resp):
