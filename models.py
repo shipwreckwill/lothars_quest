@@ -23,19 +23,27 @@ class Weapon(Base):
     value = Column(Integer)
     damage = Column(Integer)
 
-class ButtResource:
-    def on_get(self, req, resp):
-        resp.status = falcon.HTTP_200
-        resp.content_type = falcon.MEDIA_TEXT
-        thing = {'message': 'Buttt'}
-        resp.body = json.dumps(thing)
+class Location(Base):
+    __tablename__ = 'Location'
+    id = Column(Integer, primary_key=True)
+    title = Column(String(50))
+    description = Column(String(240))
+    exits = Column(Array(String(20)))
+    items = Column(Array(Integer))
 
-    def on_post(self, req, resp):
-        butt = req.get_param("name", required=True)
-        message = {'message': butt}
-        resp.status = falcon.HTTP_200
-        # resp.content_type = falcon.MEDIA_TEXT
-        resp.body = json.dumps(message)
+# class ButtResource:
+#     def on_get(self, req, resp):
+#         resp.status = falcon.HTTP_200
+#         resp.content_type = falcon.MEDIA_TEXT
+#         thing = {'message': 'Buttt'}
+#         resp.body = json.dumps(thing)
+
+#     def on_post(self, req, resp):
+#         butt = req.get_param("name", required=True)
+#         message = {'message': butt}
+#         resp.status = falcon.HTTP_200
+#         # resp.content_type = falcon.MEDIA_TEXT
+#         resp.body = json.dumps(message)
 
 if __name__ == "__main__":
     from sqlalchemy import create_engine

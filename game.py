@@ -1,4 +1,5 @@
 import random
+
 class Game:
     def rollDice(self, die):
         diceBag = [4,6,8,10,12,20]

@@ -1,6 +1,5 @@
 from falcon_autocrud.resource import CollectionResource, SingleResource
 from models import *
-import random
 from game import *
 
 game = Game()
@@ -18,6 +17,13 @@ class WeaponCollectionResource(CollectionResource):
 
 class WeaponResource(SingleResource):
     model = Weapon
+
+class LocationCollectionResource(CollectionResource):
+    model Location
+    methods = ['GET', 'POST', 'PUT']
+
+class LocationResource(SingleResource):
+    model Location
 
 class ButtResource:
     """
@@ -56,16 +62,8 @@ class DiceResource:
                     '\n --D04\n\n')
     
     def on_post(self, req, resp):
-        # diceBag = [4,6,8,10,12,20]
         die = int(req.get_param("die", required=True))
         resp.status = falcon.HTTP_200
         print(f"The dice rolled is: {die}")
         message = game.rollDice(die)
         resp.body = json.dumps(message)
-        # if die in diceBag:
-        #     roll = random.randrange(die)
-        #     message = {'roll': roll}
-        #     resp.body = json.dumps(message)
-        # else:
-        #     message = { 'error' : 'You do not have that die in your Dice Bag...'}
-        #     resp.body = json.dumps(message)
