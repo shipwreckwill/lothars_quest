@@ -1,7 +1,7 @@
 from falcon_autocrud.resource import CollectionResource, SingleResource
 from models import *
 import random
-import game
+from game import *
 
 game = Game()
 

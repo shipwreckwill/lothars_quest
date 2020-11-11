@@ -1,5 +1,5 @@
 class Game:
-    def rollDice(die):
+    def rollDice(self, die):
         diceBag = [4,6,8,10,12,20]
         if die in diceBag:
             roll = random.randrange(die)
