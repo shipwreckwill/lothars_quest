@@ -1,7 +1,7 @@
 from falcon_autocrud.resource import CollectionResource, SingleResource
 from models import *
 from game import *
-from sqlalchemy.orm import sessionmaker, Session
+from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine,select
 
 db_engine = create_engine('postgresql:///characters.db')
