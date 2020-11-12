@@ -24,7 +24,7 @@ app.add_route('/butt', butt)
 
 app.add_route('/locations', LocationCollectionResource(db_engine))
 app.add_route('/locations/{id}', LocationResource(db_engine))
-app.add_route('/locations/{id}/items', LocalItemsResource(db_engine))
+app.add_route('/locations/items', LocalItemsResource(db_engine))
 
 app.add_route('/character', CharacterCollectionResource(db_engine))
 app.add_route('/character/{id}', CharacterResource(db_engine))
