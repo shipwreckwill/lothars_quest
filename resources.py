@@ -34,7 +34,7 @@ class LocalItemsResource(SingleResource):
     model = Location
     def on_post(self,req, resp):
         things = int(req.get_param("location", required=True))
-        session = Session(db_engine, future=True)
+        session = Session(db_engine)
         statement = select(Location.inventory)
         result = session.execute(statement).all()
         print(result)
