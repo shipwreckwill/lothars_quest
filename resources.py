@@ -37,6 +37,7 @@ class LocalItemsResource(SingleResource):
         session = Session(db_engine, future=True)
         statement = select(Location.inventory)
         result = session.execute(statement).all()
+        print(result)
         resp.status = falcon.HTTP_200
         resp.body = json.dumps(result)
         
