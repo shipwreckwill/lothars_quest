@@ -30,7 +30,7 @@ class LocationCollectionResource(CollectionResource):
 class LocationResource(SingleResource):
     model = Location
 
-class LocalItemsResource:
+class LocalItemsResource(SingleResource):
     def on_Post(self,req, resp):
         things = int(req.get_param("location", required=True))
         with Session(db_engine) as session:
