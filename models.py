@@ -31,20 +31,6 @@ class Location(Base):
     exits = Column(ARRAY(String(20)))
     inventory = Column(ARRAY(Integer))
 
-# class ButtResource:
-#     def on_get(self, req, resp):
-#         resp.status = falcon.HTTP_200
-#         resp.content_type = falcon.MEDIA_TEXT
-#         thing = {'message': 'Buttt'}
-#         resp.body = json.dumps(thing)
-
-#     def on_post(self, req, resp):
-#         butt = req.get_param("name", required=True)
-#         message = {'message': butt}
-#         resp.status = falcon.HTTP_200
-#         # resp.content_type = falcon.MEDIA_TEXT
-#         resp.body = json.dumps(message)
-
 if __name__ == "__main__":
     from sqlalchemy import create_engine
 

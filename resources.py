@@ -1,6 +1,7 @@
 from falcon_autocrud.resource import CollectionResource, SingleResource
 from models import *
 from game import *
+from sqlalchemy.orm import sessionmaker, Session
 
 game = Game()
 
@@ -24,6 +25,18 @@ class LocationCollectionResource(CollectionResource):
 
 class LocationResource(SingleResource):
     model = Location
+
+class LocalItemsResource(engine):
+    def on_Post(self,req, resp, engine):
+        Session = sessionmaker(bind = engine)
+        session = Session()
+        location = int(req.get_param("location", required=True))
+        query = session.query(Location).get(location)
+
+
+
+
+
 
 class ButtResource:
     """
