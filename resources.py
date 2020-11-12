@@ -35,7 +35,7 @@ class LocalItemsResource(SingleResource):
     def on_post(self,req, resp):
         things = int(req.get_param("location", required=True))
         session = Session(db_engine)
-        statement = select(Location.inventory)
+        statement = select(Location).filter_by(id=things)
         result = session.execute(statement).all()
         print(result)
         resp.status = falcon.HTTP_200
