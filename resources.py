@@ -35,11 +35,11 @@ class LocalItemsResource(SingleResource):
     def on_post(self,req, resp):
         things = int(req.get_param("location", required=True))
         Session = sessionmaker(db_engine)
-        session = Session.begin()
-        result = session.query(Location.inventory).all()
-        print(result)
-        resp.status = falcon.HTTP_200
-        resp.body = json.dumps(result)
+        swith Session.begin() as session:
+            result = session.query(Location.inventory).all()
+            print(result)
+            resp.status = falcon.HTTP_200
+            resp.body = json.dumps(result)
         
 
 class ButtResource:
