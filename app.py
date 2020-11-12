@@ -5,7 +5,7 @@ import json
 from resources import *
 from falcon_autocrud.middleware import Middleware
 
-db_engine = create_engine('postgresql:///characters.db')
+# db_engine = create_engine('postgresql:///characters.db')
 
 app = falcon.API(
     middleware=[
