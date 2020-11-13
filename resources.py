@@ -33,7 +33,7 @@ class LocationResource(SingleResource):
 class LocalItemsResource:
     db_engine = create_engine('postgresql:///characters.db')
     Session = sessionmaker()
-    session = Session.configure(bind=db_engine)
+    Session.configure(bind=db_engine)
     location = session.query(Location).all()
     def on_post(self,req, resp):
         # things = int(req.get_param("location", required=True))
