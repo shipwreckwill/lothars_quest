@@ -8,7 +8,6 @@ db_engine = create_engine('postgresql:///characters.db')
 DBSession = sessionmaker()
 DBSession.bind = db_engine
 session = DBSession()
-session.query(Location).all()
 
 game = Game()
 
@@ -33,12 +32,11 @@ class LocationCollectionResource(CollectionResource):
 class LocationResource(SingleResource):
     model = Location
 
-class LocalItemsResource(SingleResource):
-    model = Location
+class LocalItemsResource:
     def on_post(self,req, resp):
         # things = int(req.get_param("location", required=True))
         location = session.query(Location).get(1)
-        location.inventory
+        print(location.inventory)
         
 
 class ButtResource:
