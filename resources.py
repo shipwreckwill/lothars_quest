@@ -3,10 +3,7 @@ from models import *
 from game import *
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine,select
-
 db_engine = create_engine('postgresql:///characters.db')
-DBSession = sessionmaker()
-session = DBSession.configure(bind=db_engine)
 game = Game()
 
 class CharacterCollectionResource(CollectionResource):
@@ -31,10 +28,10 @@ class LocationResource(SingleResource):
     model = Location
 
 class LocalItemsResource:
-    db_engine = create_engine('postgresql:///characters.db')
     Session = sessionmaker()
     Session.configure(bind=db_engine)
-    location = session.query(Location).all()
+    sesh = Session()
+    location = sesh.query(Location).get(1)
     def on_post(self,req, resp):
         # things = int(req.get_param("location", required=True))
         
