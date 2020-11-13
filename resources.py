@@ -6,9 +6,7 @@ from sqlalchemy import create_engine,select
 
 db_engine = create_engine('postgresql:///characters.db')
 DBSession = sessionmaker()
-DBSession.bind = db_engine
-session = DBSession()
-
+session = DBSession.configure(bind=db_engine)
 game = Game()
 
 class CharacterCollectionResource(CollectionResource):
@@ -35,10 +33,6 @@ class LocationResource(SingleResource):
 class LocalItemsResource:
     def on_post(self,req, resp):
         # things = int(req.get_param("location", required=True))
-        db_engine = create_engine('postgresql:///characters.db')
-        DBSession = sessionmaker()
-        DBSession.bind = db_engine
-        session = DBSession()
         location = session.query(Location).get(1)
         print(location.inventory)
         
