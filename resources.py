@@ -31,10 +31,14 @@ class LocationResource(SingleResource):
     model = Location
 
 class LocalItemsResource:
+    db_engine = create_engine('postgresql:///characters.db')
+    Session = sessionmaker()
+    session = Session.configure(bind=db_engine)
+    location = session.query(Location).all()
     def on_post(self,req, resp):
         # things = int(req.get_param("location", required=True))
-        location = session.query(Location).all()
-        print(location.inventory)
+        
+        print(self.location.inventory)
         
 
 class ButtResource:
