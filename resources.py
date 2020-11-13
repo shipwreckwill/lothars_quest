@@ -35,6 +35,10 @@ class LocationResource(SingleResource):
 class LocalItemsResource:
     def on_post(self,req, resp):
         # things = int(req.get_param("location", required=True))
+        db_engine = create_engine('postgresql:///characters.db')
+        DBSession = sessionmaker()
+        DBSession.bind = db_engine
+        session = DBSession()
         location = session.query(Location).get(1)
         print(location.inventory)
         
