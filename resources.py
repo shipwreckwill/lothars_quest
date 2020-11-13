@@ -4,6 +4,9 @@ from game import *
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine,select
 db_engine = create_engine('postgresql:///characters.db')
+Session = sessionmaker()
+Session.configure(bind=db_engine)
+sesh = Session()
 game = Game()
 
 class CharacterCollectionResource(CollectionResource):
@@ -28,16 +31,18 @@ class LocationResource(SingleResource):
     model = Location
 
 class LocalItemsResource:
-    Session = sessionmaker()
-    Session.configure(bind=db_engine)
-    sesh = Session()
     def on_post(self,req, resp):
         place = int(req.get_param("location", required=True))
-        localThings = self.sesh.query(Location).get(place)
-        # print(localThings.inventory)
+        localThings = sesh.query(Location).get(place)
+        result = []
         for x in localThings.inventory:
-            thing = self.sesh.query(Weapon).filter(Weapon.id == x).one()
-            print(thing.title)
+            thing = sesh.query(Weapon).filter(Weapon.id == x).one()
+            # print(thing.title)
+            result.append(thing.title)
+        resp.status = falcon.HTTP_200
+        resp.content_type = falcon.MEDIA_TEXT
+        message = {'localThings' : result}
+        resp.body = json.dumps(message)
 
 class ButtResource:
     """
