@@ -34,7 +34,7 @@ class LocalItemsResource:
     def on_post(self,req, resp):
         place = int(req.get_param("location", required=True))
         localThings = self.sesh.query(Location).get(place)
-        print(location.inventory)
+        print(localThings.inventory)
         
 
 class ButtResource:
