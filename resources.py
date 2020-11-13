@@ -1,11 +1,14 @@
 from falcon_autocrud.resource import CollectionResource, SingleResource
 from models import *
 from game import *
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine,select
 
 db_engine = create_engine('postgresql:///characters.db')
-
+DBSession = sessionmaker()
+DBSession.bind = db_engine
+session = DBSession()
+session.query(Location).all()
 
 game = Game()
 
@@ -33,13 +36,9 @@ class LocationResource(SingleResource):
 class LocalItemsResource(SingleResource):
     model = Location
     def on_post(self,req, resp):
-        things = int(req.get_param("location", required=True))
-        session = Session(db_engine)
-        statement = select(Location).filter_by(name="id")
-        result = session.execute(statement).all()
-        print(result)
-        resp.status = falcon.HTTP_200
-        resp.body = json.dumps(result)
+        # things = int(req.get_param("location", required=True))
+        location = session.query(Location).get(1)
+        location.inventory
         
 
 class ButtResource:
