@@ -31,11 +31,10 @@ class LocalItemsResource:
     Session = sessionmaker()
     Session.configure(bind=db_engine)
     sesh = Session()
-    location = sesh.query(Location).get(1)
     def on_post(self,req, resp):
-        # things = int(req.get_param("location", required=True))
-        
-        print(self.location.inventory)
+        place = int(req.get_param("location", required=True))
+        localThings = self.sesh.query(Location).get(place)
+        print(location.inventory)
         
 
 class ButtResource:
