@@ -33,7 +33,7 @@ class LocationResource(SingleResource):
 class LocalItemsResource:
     def on_post(self,req, resp):
         # things = int(req.get_param("location", required=True))
-        location = session.query(Location).get(1)
+        location = session.query(Location).all()
         print(location.inventory)
         
 
