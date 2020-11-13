@@ -34,8 +34,10 @@ class LocalItemsResource:
     def on_post(self,req, resp):
         place = int(req.get_param("location", required=True))
         localThings = self.sesh.query(Location).get(place)
-        print(localThings.inventory)
-        
+        # print(localThings.inventory)
+        for x in localThings.inventory:
+            thing = self.sesh.query(Weapon).filter(Weapon.id == x).one()
+            print(thing.title)
 
 class ButtResource:
     """
